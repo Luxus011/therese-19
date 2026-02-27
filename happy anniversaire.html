@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joyeux 19 ans,  Thérèse ❤️ – Ton cadeau perso</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0f001a, #1a0033, #33001a);
+      color: #f0e6ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    .password-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,0,20,0.97);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1.2s ease;
+    }
+    .password-screen.hidden { opacity:0; pointer-events:none; }
+    .lock { font-size: 6rem; margin-bottom: 1.5rem; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100% {transform:scale(1);} 50% {transform:scale(1.12);} }
+    input, button {
+      padding: 1.2rem 2rem;
+      font-size: 1.4rem;
+      border: none;
+      border-radius: 50px;
+      margin: 1rem;
+      width: 320px;
+      max-width: 90%;
+      transition: all 0.3s;
+    }
+    input { background:#2a134a; color:#fff; text-align:center; box-shadow:0 0 15px rgba(255,105,180,0.3); }
+    input:focus { outline:none; box-shadow:0 0 25px #ff4d94; }
+    button { background:#ff4d94; color:white; font-weight:700; cursor:pointer; }
+    button:hover { background:#ff3399; transform:scale(1.08); box-shadow:0 0 30px #ff4d94; }
+
+    header {
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background: linear-gradient(to bottom, rgba(255,77,148,0.18), transparent 70%);
+    }
+    h1 {
+      font-size: 4.5rem;
+      color: #ff99cc;
+      text-shadow: 0 0 30px rgba(255,105,180,0.7), 0 0 60px rgba(255,20,147,0.4);
+      margin-bottom: 0.6rem;
+      animation: glow 3s infinite alternate;
+    }
+    @keyframes glow { from {text-shadow:0 0 20px #ff69b4;} to {text-shadow:0 0 50px #ff1493;} }
+    .subtitle { font-size:1.6rem; opacity:0.92; letter-spacing:1px; }
+
+    section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1.2s ease;
+    }
+    section.visible { opacity:1; transform:translateY(0); }
+
+    h2 {
+      font-size: 3rem;
+      color: #ff99cc;
+      text-align: center;
+      margin: 3rem 0 2rem;
+      position: relative;
+    }
+    h2::after {
+      content:""; display:block; width:160px; height:5px; background:linear-gradient(to right, #ff4d94, #ff99cc);
+      margin:1.2rem auto; border-radius:3px;
+    }
+
+    .message, .long-text {
+      font-size: 1.4rem;
+      background: rgba(255,255,255,0.05);
+      padding: 3rem;
+      border-radius: 24px;
+      border: 1px solid rgba(255,105,180,0.18);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      margin: 2.5rem 0;
+    }
+
+    .typing {
+      font-size: 1.8rem;
+      color: #ffccdd;
+      min-height: 4rem;
+      text-align: center;
+      font-family: monospace;
+      margin: 2.5rem 0;
+      letter-spacing: 1px;
+    }
+    .cursor { animation: blink 0.7s infinite; }
+    @keyframes blink { 50% {opacity:0;} }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .gallery img, .gallery video {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      transition: all 0.5s ease;
+      object-fit: cover;
+      aspect-ratio: 4/5;
+    }
+    .gallery img:hover, .gallery video:hover {
+      transform: scale(1.08) translateY(-12px);
+      box-shadow: 0 30px 70px rgba(255,77,148,0.5);
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      margin: 3rem 0;
+    }
+    .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 4rem auto;
+    }
+    .timeline::before {
+      content:""; position:absolute; width:4px; background:#ff4d94; top:0; bottom:0; left:50%; margin-left:-2px;
+    }
+    .event {
+      padding: 2rem;
+      width: 45%;
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      margin: 2rem 0;
+    }
+    .event.left { left:0; }
+    .event.right { left:55%; }
+    .event::before {
+      content:""; position:absolute; width:20px; height:20px; background:#ff99cc; border-radius:50%; top:30px;
+      box-shadow:0 0 15px #ff4d94;
+    }
+    .event.left::before { right:-34px; }
+    .event.right::before { left:-34px; }
+
+    footer {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      font-size: 1.3rem;
+      opacity: 0.85;
+    }
+    .heart { color:#ff4d94; font-size:1.6em; animation: beat 1.5s infinite; }
+    @keyframes beat { 0%,100% {transform:scale(1);} 50% {transform:scale(1.35);} }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 3.2rem; }
+      h2 { font-size: 2.4rem; }
+      .timeline::before { left:30px; }
+      .event { width:80%; left:60px !important; }
+      .event::before { left:-34px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="password-screen" id="pwdScreen">
+  <div class="lock">💗</div>
+  <h1 style="font-size:3rem; color:#ff99cc; text-align:center;">Uniquement pour Thérèse</h1>
+  <input type="password" id="password" placeholder="Mot de passe secret..." autocomplete="off"/>
+  <button onclick="checkPassword()">Ouvrir ton monde ❤️</button>
+</div>
+
+<audio id="bgMusic" loop autoplay>
+  <!-- Lien direct Pixabay – emotional/romantic piano (testé fiable en 2026) -->
+  <source src="https://cdn.pixabay.com/download/audio/2024/09/12/audio_0d7f8b9c1a.mp3?filename=emotional-piano-162345.mp3" type="audio/mpeg">
+  <!-- Fallback si besoin : autre lien gratuit AShamaluevMusic ou Chosic -->
+  <!-- <source src="https://www.ashamaluevmusic.com/wp-content/uploads/2023/Beautiful-Calm-Piano.mp3" type="audio/mpeg"> -->
+  Ton navigateur bloque la musique… dommage 😔
+</audio>
+
+<header>
+  <h1>Joyeux 19 ans Thérèse ! 🎂💖</h1>
+  <p class="subtitle">Pour la fille qui a sauvé mes pires jours et illuminé tous les autres</p>
+</header>
+
+<section id="sec1">
+  <h2>Le message qui compte</h2>
+  <div class="message">
+    <p class="typing" id="typingText"></p>
+    <p style="margin-top:2.5rem; font-size:1.45rem;">
+      Thérèse… 19 ans. Putain, ça y est, t’es officiellement une adulte encore plus incroyable.<br><br>
+      Je sais pas par où commencer tellement y’a de choses à dire. T’es arrivée pile quand j’allais lâcher, quand je voyais plus rien de beau. Et t’as décidé de rester. Pas juste un peu. Vraiment rester. À m’écouter parler en boucle des mêmes merdes, à me checker à 3h du mat’ parce que j’avais pas répondu, à me supporter même quand j’étais insupportable.<br><br>
+      T’es ma safe place. Celle qui sait tout, même les trucs que j’ai honte d’avouer. T’as tjrs jugé(ta grosse tête là) mais jamais tourné le dos. T’as juste… aimé. Fort. Sans condition.<br><br>
+      Ça fait trop longtemps qu’on s’est pas vus et ça me tue un peu chaque jour. Mais même à des kilomètres, t’es toujours là, dans ma tête, dans mon cœur, dans mes meilleures blagues et mes pires moments.<br><br>
+      Merci d’être née. Merci d’être toi. Merci d’avoir choisi de m’aimer quand c’était pas facile.<br><br>
+      Je t’aime. Genre vraiment. Plus que les mots peuvent le dire. Et je te souhaite une année 19 tellement dingue, tellement belle, tellement remplie de toi que tu vas même pas y croire.<br><br>
+      Gros bisous partout, partout, partout.<br>Ton fan/meilleur ami qui t’oubliera jamais ❤️❤️❤️
+    </p>
+  </div>
+</section>
+
+<section id="sec2">
+  <h2>Nos souvenirs qui me font encore sourire (et parfois pleurer)</h2>
+  <div class="gallery">
+    <!-- Remplace par TES liens Imgur / ImgBB / Google Drive direct / etc. -->
+    <img src="photosvideos/IMG_20250121_011017_912.webp" alt="">
+    <img src="photosvideos/IMG_20250121_011259_915.webp" alt="">
+    <img src="photosvideos/IMG_20250121_011416_686.webp" alt="">
+    <img src="photosvideos/IMG_20250121_011554_540.webp" alt="">
+    <img src="photosvideos/IMG-20241225-WA0010.jpg" alt="">
+    <img src="photosvideos/IMG-20250205-WA0022.jpg" alt="">
+    <img src="photosvideos/Screenshot_20250301-092624.jpg" alt="">
+    <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.06.jpeg" alt="">
+     <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.07.jpeg" alt="">
+      <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.14.jpeg" alt="">
+  </div>
+</section>
+
+<section id="sec3">
+  <h2>Petite timeline de nous</h2>
+  <div class="timeline">
+    <div class="event left">
+      <h3>Le jour où on s'est parlé la première fois</h3>
+      <p>On été comme chien et chat...Mais avec le temps on a appris a se connaître et aujourd'hui on est inséparable</p>
+    </div>
+    <div class="event right">
+      <h3>Quand t'as passé la nuit à m'écouter</h3>
+      <p>J'étais au fond. T'as pas dormi pour rester avec moi. Ça change tout.</p>
+    </div>
+    <div class="event left">
+      <h3>Nos appels de 5h du mat'</h3>
+      <p>On parlait de rien et de tout. C'était parfait.</p>
+    </div>
+    <div class="event right">
+      <h3>Aujourd'hui – tes 19 ans</h3>
+      <p>Et je suis toujours là, à t'aimer comme un dingue.</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="sec5">
+  <h2>Pour tes 19 ans, je te promets…</h2>
+  <div class="long-text">
+    <ul style="list-style:none; padding-left:0; font-size:1.35rem;">
+      <li>→ De toujours être là, même quand c’est le chaos</li>
+      <li>→ De te faire rire quand t’en auras marre de pleurer</li>
+      <li>→ De garder tous nos secrets jusqu’à la fin</li>
+      <li>→ De te rappeler à quel point t’es exceptionnelle</li>
+      <li>→ De t’aimer encore plus fort chaque année qui passe</li>
+      <li>→ Et de te retrouver IRL très vite, promis ❤️</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Fait avec <span class="heart">❤️</span> pour la meilleure personne du monde<br>
+  28 février 2026 – Joyeux anniversaire, mon amour de meilleure amie
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script>
+// Mot de passe – CHANGE ÇA !
+function checkPassword() {
+  const pwd = document.getElementById('password').value.trim().toLowerCase();
+  if (pwd === 'Mouniaka' || pwd === 'mafavorite') { // ← MET TON MDP ICI
+    document.getElementById('pwdScreen').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('pwdScreen').style.display = 'none';
+      document.getElementById('bgMusic').play().catch(() => console.log("autoplay bloqué, clique quelque part"));
+      massiveConfetti();
+      startTyping();
+    }, 1200);
+  } else {
+    alert("Essaie encore… t’es proche, je le sens 😏❤️");
+  }
+}
+
+// Confetti x3 plus intense
+function massiveConfetti() {
+  const colors = ['#ff4d94', '#ff99cc', '#ff3399', '#ffffff', '#c71585'];
+  for(let i = 0; i < 5; i++) {
+    setTimeout(() => {
+      confetti({
+        particleCount: 120,
+        spread: 90,
+        startVelocity: 45,
+        ticks: 300,
+        colors,
+        origin: { y: 0.6 }
+      });
+    }, i * 400);
+  }
+}
+
+// Typing
+const typingEl = document.getElementById('typingText');
+const fullMsg = "Joyeux 19 ans  Thérèse...💧💗";
+let idx = 0;
+function typeWriter() {
+  if (idx < fullMsg.length) {
+    typingEl.innerHTML += fullMsg.charAt(idx);
+    idx++;
+    setTimeout(typeWriter, 70);
+  } else {
+    typingEl.innerHTML += '<span class="cursor">|</span>';
+  }
+}
+function startTyping() {
+  setTimeout(typeWriter, 1000);
+}
+
+// Reveal sections on scroll
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => observer.observe(sec));
+
+// Confetti bonus sur scroll long
+let confettiFired = false;
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 800 && !confettiFired) {
+    massiveConfetti();
+    confettiFired = true;
+  }
+});
+</script>
+
+</body>
+</html>
