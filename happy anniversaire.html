@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Joyeux 19 ans,  Thérèse ❤️ – Ton cadeau perso</title>
+  <title>Joyeux 19 ans, Thérèse ❤️ – Ton cadeau perso</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -14,35 +14,6 @@
       overflow-x: hidden;
       line-height: 1.7;
     }
-    .password-screen {
-      position: fixed;
-      inset: 0;
-      background: rgba(10,0,20,0.97);
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 1.2s ease;
-    }
-    .password-screen.hidden { opacity:0; pointer-events:none; }
-    .lock { font-size: 6rem; margin-bottom: 1.5rem; animation: pulse 2.5s infinite; }
-    @keyframes pulse { 0%,100% {transform:scale(1);} 50% {transform:scale(1.12);} }
-    input, button {
-      padding: 1.2rem 2rem;
-      font-size: 1.4rem;
-      border: none;
-      border-radius: 50px;
-      margin: 1rem;
-      width: 320px;
-      max-width: 90%;
-      transition: all 0.3s;
-    }
-    input { background:#2a134a; color:#fff; text-align:center; box-shadow:0 0 15px rgba(255,105,180,0.3); }
-    input:focus { outline:none; box-shadow:0 0 25px #ff4d94; }
-    button { background:#ff4d94; color:white; font-weight:700; cursor:pointer; }
-    button:hover { background:#ff3399; transform:scale(1.08); box-shadow:0 0 30px #ff4d94; }
 
     header {
       text-align: center;
@@ -179,18 +150,8 @@
 </head>
 <body>
 
-<div class="password-screen" id="pwdScreen">
-  <div class="lock">💗</div>
-  <h1 style="font-size:3rem; color:#ff99cc; text-align:center;">Uniquement pour Thérèse</h1>
-  <input type="password" id="password" placeholder="Mot de passe secret..." autocomplete="off"/>
-  <button onclick="checkPassword()">Ouvrir ton monde ❤️</button>
-</div>
-
 <audio id="bgMusic" loop autoplay>
-  <!-- Lien direct Pixabay – emotional/romantic piano (testé fiable en 2026) -->
   <source src="https://cdn.pixabay.com/download/audio/2024/09/12/audio_0d7f8b9c1a.mp3?filename=emotional-piano-162345.mp3" type="audio/mpeg">
-  <!-- Fallback si besoin : autre lien gratuit AShamaluevMusic ou Chosic -->
-  <!-- <source src="https://www.ashamaluevmusic.com/wp-content/uploads/2023/Beautiful-Calm-Piano.mp3" type="audio/mpeg"> -->
   Ton navigateur bloque la musique… dommage 😔
 </audio>
 
@@ -208,7 +169,7 @@
       Je sais pas par où commencer tellement y’a de choses à dire. T’es arrivée pile quand j’allais lâcher, quand je voyais plus rien de beau. Et t’as décidé de rester. Pas juste un peu. Vraiment rester. À m’écouter parler en boucle des mêmes merdes, à me checker à 3h du mat’ parce que j’avais pas répondu, à me supporter même quand j’étais insupportable.<br><br>
       T’es ma safe place. Celle qui sait tout, même les trucs que j’ai honte d’avouer. T’as tjrs jugé(ta grosse tête là) mais jamais tourné le dos. T’as juste… aimé. Fort. Sans condition.<br><br>
       Ça fait trop longtemps qu’on s’est pas vus et ça me tue un peu chaque jour. Mais même à des kilomètres, t’es toujours là, dans ma tête, dans mon cœur, dans mes meilleures blagues et mes pires moments.<br><br>
-      Merci d’être née. Merci d’être toi. Merci d’avoir choisi de m’aimer quand c’était pas facile.<br><br>
+      Merci d’être née. Merci d’être toi. Merci d’avoir choisi de m'aimer quand c’était pas facile.<br><br>
       Je t’aime. Genre vraiment. Plus que les mots peuvent le dire. Et je te souhaite une année 19 tellement dingue, tellement belle, tellement remplie de toi que tu vas même pas y croire.<br><br>
       Gros bisous partout, partout, partout.<br>Ton fan/meilleur ami qui t’oubliera jamais ❤️❤️❤️
     </p>
@@ -218,7 +179,6 @@
 <section id="sec2">
   <h2>Nos souvenirs qui me font encore sourire (et parfois pleurer)</h2>
   <div class="gallery">
-    <!-- Remplace par TES liens Imgur / ImgBB / Google Drive direct / etc. -->
     <img src="photosvideos/IMG_20250121_011017_912.webp" alt="">
     <img src="photosvideos/IMG_20250121_011259_915.webp" alt="">
     <img src="photosvideos/IMG_20250121_011416_686.webp" alt="">
@@ -227,8 +187,8 @@
     <img src="photosvideos/IMG-20250205-WA0022.jpg" alt="">
     <img src="photosvideos/Screenshot_20250301-092624.jpg" alt="">
     <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.06.jpeg" alt="">
-     <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.07.jpeg" alt="">
-      <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.14.jpeg" alt="">
+    <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.07.jpeg" alt="">
+    <img src="photosvideos/WhatsApp Image 2026-02-19 at 01.19.14.jpeg" alt="">
   </div>
 </section>
 
@@ -254,7 +214,6 @@
   </div>
 </section>
 
-
 <section id="sec5">
   <h2>Pour tes 19 ans, je te promets…</h2>
   <div class="long-text">
@@ -277,22 +236,6 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <script>
-// Mot de passe – CHANGE ÇA !
-function checkPassword() {
-  const pwd = document.getElementById('password').value.trim().toLowerCase();
-  if (pwd === 'Mouniaka' || pwd === 'mafavorite') { // ← MET TON MDP ICI
-    document.getElementById('pwdScreen').classList.add('hidden');
-    setTimeout(() => {
-      document.getElementById('pwdScreen').style.display = 'none';
-      document.getElementById('bgMusic').play().catch(() => console.log("autoplay bloqué, clique quelque part"));
-      massiveConfetti();
-      startTyping();
-    }, 1200);
-  } else {
-    alert("Essaie encore… t’es proche, je le sens 😏❤️");
-  }
-}
-
 // Confetti x3 plus intense
 function massiveConfetti() {
   const colors = ['#ff4d94', '#ff99cc', '#ff3399', '#ffffff', '#c71585'];
@@ -312,7 +255,7 @@ function massiveConfetti() {
 
 // Typing
 const typingEl = document.getElementById('typingText');
-const fullMsg = "Joyeux 19 ans  Thérèse...💧💗";
+const fullMsg = "Joyeux 19 ans Thérèse...💧💗";
 let idx = 0;
 function typeWriter() {
   if (idx < fullMsg.length) {
@@ -323,8 +266,18 @@ function typeWriter() {
     typingEl.innerHTML += '<span class="cursor">|</span>';
   }
 }
+
+// Lancement direct au chargement
+window.addEventListener('load', () => {
+  document.getElementById('bgMusic').play().catch(() => console.log("autoplay bloqué"));
+  massiveConfetti();
+  setTimeout(() => {
+    startTyping();
+  }, 800);
+});
+
 function startTyping() {
-  setTimeout(typeWriter, 1000);
+  typeWriter();
 }
 
 // Reveal sections on scroll
